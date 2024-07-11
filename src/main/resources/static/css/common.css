@@ -1,6 +1,5 @@
-.valid-feedback {
+.invalid-feedback {
     display: block !important;
-    color: #f00;
 }
 .error_404 {
 position: absolute;
