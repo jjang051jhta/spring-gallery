@@ -11,35 +11,59 @@
           th:href="@{/css/common.css}"
     >
 
+    <link rel="stylesheet" href="../../static/css/gallery.css"
+          th:href="@{/css/gallery.css}"
+    >
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
 
 </head>
 <body>
 
-<div class="container">
-
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <ul>
-                <li th:each="item : ${galleryList}">
-                    <a>
-                        <div>
-                            <img src="" th:src="@{|/upload/${item.renameTitle}|}">
-                        </div>
-                        <div class="info">
-                            <h2 th:text="${item.title}"></h2>
-                            <p th:text="${item.desc}"></p>
-                            <p th:text="${item.point}"></p>
-                        </div>
-                    </a>
-                </li>
-<!--                <li>-->
-<!--                    <img src="C:/upload/image_20240711123218.png">-->
-<!--                    <img src="" th:src="@{|/upload/${galleryList[1].renameTitle}|}">-->
-<!--                </li>-->
-
-            </ul>
-        </div>
-    </div>
+<header>
+    <h1>portfolio</h1>
+</header>
+<div class="filter-box">
+    <button data-filter="item">ALL</button>
+    <button data-filter="typo">TYPO</button>
+    <button data-filter="paint">PAINT</button>
+    <button data-filter="sketch">SKETCH</button>
+    <button data-filter="photo">PHOTO</button>
+</div>
+<div class="list-box">
+    <ul class="list">
+        <li th:each="item : ${galleryList}">
+            <a href="" th:href="@{|/upload/${item.renameTitle}|}">
+                <div class="img">
+                    <img src="" alt="" th:src="@{|/upload/${item.renameTitle}|}" />
+                </div>
+                <div class="content">
+                    <h2 th:text="${item.title}">제목 들어감</h2>
+                    <p th:text="${item.desc}">내용 들어감</p>
+                    <p th:text="${item.point}">3.9</p>
+                </div>
+            </a>
+        </li>
+        <!-- <li>
+          <a href="">
+            <div class="img">
+              <img src="" alt="" />
+            </div>
+            <div class="content">
+              <h2>제목 들어감</h2>
+              <p>내용 들어감</p>
+              <p>3.9</p>
+            </div>
+          </a>
+        </li> -->
+    </ul>
+</div>
 </div>
 </body>
 </html>

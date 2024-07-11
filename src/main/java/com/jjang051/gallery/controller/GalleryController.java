@@ -47,6 +47,7 @@ public class GalleryController {
 
     @GetMapping("/json-list")
     @ResponseBody
+    @CrossOrigin(origins = "*",methods = RequestMethod.GET)
     public List<GalleryDto> jsonList(Model model) {
         return galleryService.list();
     }
