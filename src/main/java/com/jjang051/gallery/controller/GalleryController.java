@@ -44,4 +44,10 @@ public class GalleryController {
         int result = galleryService.insertGallery(galleryDto);
         return "redirect:/";
     }
+
+    @GetMapping("/list")
+    @ResponseBody
+    public List<GalleryDto> list(Model model) {
+        return galleryService.list();
+    }
 }

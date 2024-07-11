@@ -38,12 +38,19 @@ public class GalleryDto {
     private LocalDateTime regDate;
 
     @Builder
-    public GalleryDto(String title, String desc, Double point, String category, MultipartFile file, String originalTitle) {
+    public GalleryDto(String title,
+                      String desc,
+                      Double point,
+                      String category,
+                      MultipartFile file,
+                      String originalTitle,
+                      String renameTitle) {
         this.title = title;
         this.desc = desc;
         this.point = point;
         this.category = category;
         this.file = file;
         this.originalTitle = originalTitle;
+        this.renameTitle = renameTitle;
     }
 }
