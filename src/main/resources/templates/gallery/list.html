@@ -38,7 +38,7 @@
 </div>
 <div class="list-box">
     <ul class="list">
-        <li th:each="item : ${galleryList}">
+        <li th:each="item : ${galleryList}" class="item" th:classappend="${item.category}">
             <a href="" th:href="@{|/upload/${item.renameTitle}|}">
                 <div class="img">
                     <img src="" alt="" th:src="@{|/upload/${item.renameTitle}|}" />
@@ -64,6 +64,41 @@
         </li> -->
     </ul>
 </div>
-</div>
+<script>
+    let grid = null;
+    $(".list")
+        .imagesLoaded()
+        .always(function (instance) {
+            grid = $(".list").isotope({
+                // options
+                getSortData: {
+                    title: ".title", // text from querySelector
+                    point: ".point",
+                },
+                itemSelector: ".item",
+                layoutMode: "masonry",
+            });
+        })
+        .done(function (instance) {
+            console.log("all images successfully loaded");
+        })
+        .fail(function () {
+            console.log("all images loaded, at least one is broken");
+        })
+        .progress(function (instance, image) {
+            var result = image.isLoaded ? "loaded" : "broken";
+            console.log("image is " + result + " for " + image.img.src);
+        });
+
+    $(".filter-box button").on("click", function () {
+        console.log($(this).data("filter"));
+        const filterItem = `.${$(this).data("filter")}`;
+        grid.isotope({
+            filter: filterItem,
+            sortBy: "point",
+        });
+        $(this).addClass("on").siblings().removeClass("on");
+    });
+</script>
 </body>
 </html>
