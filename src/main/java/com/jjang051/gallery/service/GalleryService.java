@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -20,9 +23,21 @@ public class GalleryService {
         log.info("galleryDto.getFile()==={}",galleryDto.getFile().toString());
         log.info("galleryDto.getFile()==={}",galleryDto.getFile().getOriginalFilename());
 
+        String originalFileName = galleryDto.getFile().getOriginalFilename();
+        String fileName =
+                originalFileName.substring(0,originalFileName.lastIndexOf("."));
+        String extention =
+                originalFileName.substring(originalFileName.lastIndexOf("."));
+        log.info("fileName=={}, extention==={}",fileName,extention);
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter dateTimeFormatter =
+                DateTimeFormatter.ofPattern("YYYYMMddhhmmss");
+        String format = now.format(dateTimeFormatter);  //fileName _ 20240711115021 extention
+        String renameFileName = fileName+"_"+format+extention;
+        log.info("renameFileName==={}",renameFileName);
 
 
-
-        return galleryDao.insertGallery(galleryDto);
+        return 1;
+        //return galleryDao.insertGallery(galleryDto);
     }
 }
