@@ -2,22 +2,24 @@ package com.jjang051.gallery.controller;
 
 import com.jjang051.gallery.dto.GalleryDto;
 import com.jjang051.gallery.enums.Category;
+import com.jjang051.gallery.service.GalleryService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/gallery")
 public class GalleryController {
-
+    private final GalleryService galleryService;
     private Category categoryArray [] =
             {Category.PAINT,Category.PHOTO,Category.SKETCH};
     List<Category> categoryList = Arrays.asList(categoryArray);
@@ -38,7 +40,8 @@ public class GalleryController {
             model.addAttribute("categoryList",categoryList);
             return "gallery/write";
         }
-
+        log.info("galleryDto==={}",galleryDto.toString());
+        int result = galleryService.insertGallery(galleryDto);
         return "redirect:/";
     }
 }

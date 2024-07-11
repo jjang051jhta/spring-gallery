@@ -39,6 +39,7 @@
                 <div class="mb-5">
                     <label for="desc" class="form-label fw-bold h5">CATEGORY</label>
                     <select class="form-select" name="category" th:field="*{category}">
+                        <option value="">카테고리를 선택해주세요</option>
                         <option th:each="item : ${categoryList}"
                                 th:text="${item.kor}" th:value="${item.eng}">photo</option>
                     </select>
