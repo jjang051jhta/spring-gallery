@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"
+    >
+
+    <link rel="stylesheet" href="../../static/css/common.css"
+          th:href="@{/css/common.css}"
+    >
+
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <ul>
+                <li th:each="item : ${galleryList}">
+                    <a>
+                        <div>
+                            <img src="" th:src="@{|/upload/${item.renameTitle}|}">
+                        </div>
+                        <div class="info">
+                            <h2 th:text="${item.title}"></h2>
+                            <p th:text="${item.desc}"></p>
+                            <p th:text="${item.point}"></p>
+                        </div>
+                    </a>
+                </li>
+<!--                <li>-->
+<!--                    <img src="C:/upload/image_20240711123218.png">-->
+<!--                    <img src="" th:src="@{|/upload/${galleryList[1].renameTitle}|}">-->
+<!--                </li>-->
+
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

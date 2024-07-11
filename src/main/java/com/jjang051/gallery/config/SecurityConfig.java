@@ -21,6 +21,7 @@ public class SecurityConfig {
                         "/js/**",
                         "/images/**",
                         "/h2-console/**",
+                        "/upload/**",
                         "/mapper/**"
                         ));
 

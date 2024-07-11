@@ -52,6 +52,7 @@ public class GalleryService {
         Path path = Paths.get(uploadFolder+ File.separator+renameFileName);
         try {
             Files.write(path,galleryDto.getFile().getBytes());
+            //galleryDto.getFile().transferTo(path);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

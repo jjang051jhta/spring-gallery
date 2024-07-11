@@ -45,9 +45,14 @@ public class GalleryController {
         return "redirect:/";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/json-list")
     @ResponseBody
-    public List<GalleryDto> list(Model model) {
+    public List<GalleryDto> jsonList(Model model) {
         return galleryService.list();
+    }
+    @GetMapping("/list")
+    public String list(Model model) {
+        model.addAttribute("galleryList",galleryService.list());
+        return "gallery/list";
     }
 }
