@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -29,7 +30,7 @@ public class GalleryService {
         return galleryDao.getAllList();
     }
 
-    public int insertGallery(GalleryDto galleryDto)  {
+    public Integer insertGallery(GalleryDto galleryDto)  {
         // 이름변경   aaa.jpg
         // aaa_20240711113124.jpg
         // 폴더에다가 파일을 옮기기
@@ -38,6 +39,9 @@ public class GalleryService {
         log.info("galleryDto.getFile()==={}",galleryDto.getFile().getOriginalFilename());
 
         String originalFileName = galleryDto.getFile().getOriginalFilename();
+//        if(originalFileName.isBlank()) {
+//            throw new FileNotFoundException("파일이 없습니다.");
+//        }
         String fileName =
                 originalFileName.substring(0,originalFileName.lastIndexOf("."));
         String extention =
@@ -52,7 +56,6 @@ public class GalleryService {
         Path path = Paths.get(uploadFolder+ File.separator+renameFileName);
         try {
             Files.write(path,galleryDto.getFile().getBytes());
-            //galleryDto.getFile().transferTo(path);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

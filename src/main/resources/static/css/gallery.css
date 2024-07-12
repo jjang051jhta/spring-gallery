@@ -104,3 +104,7 @@ header h1 {
 .list li a svg {
     width: 20px;
 }
+
+.filter-box button  {
+    text-transform: uppercase;
+}

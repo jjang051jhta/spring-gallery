@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"
+    >
+
+    <link rel="stylesheet" href="../../static/css/common.css"
+          th:href="@{/css/common.css}"
+    >
+
+    <link rel="stylesheet" href="../../static/css/gallery.css"
+          th:href="@{/css/gallery.css}"
+    >
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+</head>
+<body>
+
+<header>
+    <h1>portfolio</h1>
+</header>
+
+<div class="list-box">
+    <ul class="list swiper-wrapper">
+        <li th:each="item : ${galleryList}" class="item swiper-slide"
+            th:classappend="${item.category}">
+            <a href="" th:href="@{|/upload/${item.renameTitle}|}">
+                <div class="img">
+                    <img src="" alt="" th:src="@{|/upload/${item.renameTitle}|}" />
+                </div>
+                <div class="content">
+                    <h2 th:text="${item.title}">제목 들어감</h2>
+                    <p th:text="${item.desc}">내용 들어감</p>
+                    <p th:text="${item.point}">3.9</p>
+                </div>
+            </a>
+        </li>
+        <!-- <li>
+          <a href="">
+            <div class="img">
+              <img src="" alt="" />
+            </div>
+            <div class="content">
+              <h2>제목 들어감</h2>
+              <p>내용 들어감</p>
+              <p>3.9</p>
+            </div>
+          </a>
+        </li> -->
+    </ul>
+</div>
+<script>
+    const swiper = new Swiper('.list-box', {
+        // Optional parameters
+        loop: true,
+    });
+
+</script>
+</body>
+</html>

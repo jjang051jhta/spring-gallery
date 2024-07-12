@@ -19,10 +19,6 @@
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-
 </head>
 <body>
 
@@ -31,10 +27,13 @@
 </header>
 <div class="filter-box">
     <button data-filter="item">ALL</button>
-    <button data-filter="typo">TYPO</button>
-    <button data-filter="paint">PAINT</button>
-    <button data-filter="sketch">SKETCH</button>
-    <button data-filter="photo">PHOTO</button>
+    <button th:each="item : ${categoryList}"
+            th:text="${item.eng}"
+            th:attr="data-filter=${item.eng}">ALL</button>
+<!--    <button data-filter="typo">TYPO</button>-->
+<!--    <button data-filter="paint">PAINT</button>-->
+<!--    <button data-filter="sketch">SKETCH</button>-->
+<!--    <button data-filter="photo">PHOTO</button>-->
 </div>
 <div class="list-box">
     <ul class="list">

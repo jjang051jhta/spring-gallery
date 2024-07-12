@@ -9,10 +9,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -35,14 +38,21 @@ public class GalleryController {
     public String writeProcess(@Valid @ModelAttribute GalleryDto galleryDto,
                                BindingResult bindingResult,
                                Model model
-                               ) {
+                               ) throws FileNotFoundException {
         if(bindingResult.hasErrors()) {
             model.addAttribute("categoryList",categoryList);
             return "gallery/write";
         }
-        log.info("galleryDto==={}",galleryDto.toString());
-        int result = galleryService.insertGallery(galleryDto);
-        return "redirect:/";
+        if(galleryDto.getFile().isEmpty()) {
+            bindingResult.addError(
+                new FieldError
+            ("fileError","file","이미지를 선택해주세요"));
+            model.addAttribute("categoryList",categoryList);
+            return "gallery/write";
+        }
+        //log.info("galleryDto.getFile().isEmpty()===", galleryDto.getFile().isEmpty());
+        galleryService.insertGallery(galleryDto);
+        return "redirect:/gallery/list";
     }
 
     @GetMapping("/json-list")
@@ -53,7 +63,15 @@ public class GalleryController {
     }
     @GetMapping("/list")
     public String list(Model model) {
+        model.addAttribute("categoryList",categoryList);
         model.addAttribute("galleryList",galleryService.list());
         return "gallery/list";
+    }
+
+    @GetMapping("/list02")
+    public String list02(Model model) {
+        model.addAttribute("categoryList",categoryList);
+        model.addAttribute("galleryList",galleryService.list());
+        return "gallery/list02";
     }
 }
